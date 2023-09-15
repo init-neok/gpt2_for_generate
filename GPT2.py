@@ -3,7 +3,7 @@ import os
 from transformers import GPT2LMHeadModel, GPT2Tokenizer, GPT2Config,GPT2Model
 from torch.utils.data import Dataset, DataLoader
 
-
+import pandas as pd
 
 # from transformers import cached_download
 
@@ -21,7 +21,7 @@ max_length = 512  # 根据数据集和模型的最大输入长度来设置
 model_name = 'gpt2'
 tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-model = GPT2Model.from_pretrained(model_name)
+model = GPT2LMHeadModel.from_pretrained(model_name)
 df=pd.read_csv('bbc_news.csv')
 column_data = df['description'] # 读取description列的数据
 news = list(column_data) # 将description列的数据转换成列表
